@@ -6,10 +6,13 @@ import {AiOutlineMenu,AiOutlineHeart} from "react-icons/ai";
 import {HiOutlinePaperAirplane} from "react-icons/hi";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import { useRecoilState } from "recoil";
+import { modalState } from "../atoms/modalAtom";
 
 function Header() {
 
   const {data} = useSession();
+  const [open, setOpen] = useRecoilState(modalState);
 const router = useRouter();
 
   return (
@@ -76,7 +79,7 @@ const router = useRouter();
         <HiOutlinePaperAirplane className="navBtn rotate-45"/>
         <div className=" hidden md:absolute md:top-6 md:-right-1 md:text-xs md:w-5 md:h-5 md:bg-red-500 md:rounded-full md:flex md:items-center md:justify-center md:animate-pulse md:text-white lg:-top-1 ">3</div>
         </div>
-        <BsPlusSquare className="navBtn"/>
+        <BsPlusSquare onClick={() => setOpen(true)} className="navBtn"/>
         <AiOutlineHeart className="navBtn"/>
         <Image onClick={signOut} src={data?.user?.image} width='100' height='100' className=" w-10 h-10 rounded-full  navBtn"  alt='photo de profil' />
         </>

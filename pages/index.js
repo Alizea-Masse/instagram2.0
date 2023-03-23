@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import Header from '@/components/header'
 import Feed from '@/components/feed'
+import Modal from '@/components/modal'
 
 
 
@@ -22,6 +23,7 @@ export default function Home() {
       {/* feed */}
       <Feed/>
       {/* modal */}
+      <Modal/>
       </div>
     </>
   )
