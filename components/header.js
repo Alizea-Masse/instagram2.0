@@ -4,20 +4,26 @@ import Image from "next/image";
 import {BsFillHouseFill, BsPlusSquare} from "react-icons/bs";
 import {AiOutlineMenu,AiOutlineHeart} from "react-icons/ai";
 import {HiOutlinePaperAirplane} from "react-icons/hi";
+import { signIn, signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 function Header() {
+
+  const {data} = useSession();
+const router = useRouter();
+
   return (
     <div className="shadow-sm border-b sticky top-0 z-50 ">
       <div className="flex justify-between bg-white max-w-6xl mx-5 lg:mx-auto">
         {/* gauche */}
-        <div className="relative hidden lg:inline-grid w-24 h-24 cursor-pointer ">
+        <div onClick={()=> router.push('/')} className="relative hidden lg:inline-grid w-24 h-24 cursor-pointer ">
           <Image 
             src="https://www.meilleure-innovation.com/wp-content/uploads/2022/04/logo-instagram-788x444.png"
             layout="fill"
             objectFit="contain"
           />
         </div>
-        <div className="relative w-14 h-10 lg:hidden flex-shrink-0 cursor-pointer pt-4">
+        <div onClick={()=> router.push('/')} className="relative w-14 h-10 lg:hidden flex-shrink-0 cursor-pointer pt-4">
           <Image className="mt-6 "
             src="https://webdrop.fr/wp-content/uploads/2019/04/klan-loup-instagram.png"
             layout="fill"
@@ -59,17 +65,23 @@ function Header() {
         </div>
 
         {/* droite */}
+        
         <div className="flex items-center justify-end  space-x-4">
 
        <AiOutlineMenu className="cursor-pointer h-10 w-10 mt-7 md:hidden"/>
-       <BsFillHouseFill className="navBtn"/>
-       <div className="relative">
-       <HiOutlinePaperAirplane className="navBtn rotate-45"/>
-       <div className=" hidden md:absolute md:top-6 md:-right-1 md:text-xs md:w-5 md:h-5 md:bg-red-500 md:rounded-full md:flex md:items-center md:justify-center md:animate-pulse md:text-white lg:-top-1 ">3</div>
-       </div>
-       <BsPlusSquare className="navBtn"/>
-       <AiOutlineHeart className="navBtn"/>
-       <Image src="/soleil.png" width='500' height='500' className=" w-10 h-10 rounded-full  navBtn"  alt='photo de profil' />
+       <BsFillHouseFill onClick={()=> router.push('/')} className="navBtn"/>
+       {data ? (
+        <>
+        <div className="relative">
+        <HiOutlinePaperAirplane className="navBtn rotate-45"/>
+        <div className=" hidden md:absolute md:top-6 md:-right-1 md:text-xs md:w-5 md:h-5 md:bg-red-500 md:rounded-full md:flex md:items-center md:justify-center md:animate-pulse md:text-white lg:-top-1 ">3</div>
+        </div>
+        <BsPlusSquare className="navBtn"/>
+        <AiOutlineHeart className="navBtn"/>
+        <Image onClick={signOut} src={data?.user?.image} width='100' height='100' className=" w-10 h-10 rounded-full  navBtn"  alt='photo de profil' />
+        </>
+       ) : (<button onClick={signIn} className="bg-blue-500 text-white font-bold text-sm rounded-full w-20 h-8">Connexion</button>)
+      }
         </div>
       </div>
     </div>

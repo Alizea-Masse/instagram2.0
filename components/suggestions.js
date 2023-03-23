@@ -17,7 +17,7 @@ const Suggestions = () => {
       company: faker.company.companyName(),
     }));
     setSuggestions(suggestions);
-    console.log(suggestions);
+     (suggestions);
   }, []);
 
 
