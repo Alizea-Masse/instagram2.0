@@ -36,7 +36,7 @@ const modal = () => {
             timestamp: serverTimestamp(),
         });
 
-        console.log("Document written with ID: ", docRef.id);
+       
 
         const imageRef = ref(storage, `posts/${docRef.id}/image`);
 

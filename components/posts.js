@@ -1,54 +1,42 @@
-
-import Post from './post'
-const posts = [{
-    id: 1,
-    username: 'johndoe',
-    userImg: 'https://webdrop.fr/wp-content/uploads/2019/04/klan-loup-instagram.png',
-    img:' https://webdrop.fr/wp-content/uploads/2019/04/klan-loup-instagram.png',
-    description : "This is a test"
-},
-{
-    id: 11,
-    username: 'johndoe11',
-    userImg: 'https://webdrop.fr/wp-content/uploads/2019/04/klan-loup-instagram.png',
-    img: 'https://webdrop.fr/wp-content/uploads/2019/04/klan-loup-instagram.png',
-    description : "This is a test"
-},
-{
-    id: 2,
-    username: 'johndoe2',
-    userImg: 'https://webdrop.fr/wp-content/uploads/2019/04/klan-loup-instagram.png',
-    img: 'https://webdrop.fr/wp-content/uploads/2019/04/klan-loup-instagram.png',
-    description : "This is a test"
-},
-{
-    id: 3,
-    username: 'johndoe3',
-    userImg: 'https://webdrop.fr/wp-content/uploads/2019/04/klan-loup-instagram.png',
-    img: 'https://webdrop.fr/wp-content/uploads/2019/04/klan-loup-instagram.png',
-    description : "This is a test"
-}]
-
+import { onSnapshot, orderBy } from "firebase/firestore";
+import { collection, query } from "firebase/firestore";
+import { db } from "../firebase";
+import { useEffect, useState } from "react";
+import Post from "./post";
 
 const Posts = () => {
+  const [posts, setPosts] = useState([]);
+
+  useEffect(
+    () => 
+    onSnapshot(
+      query(collection(db, "posts"), orderBy("timestamp", "desc")),
+      (snapshot) => {
+        setPosts(snapshot.docs);
+      }
+    ),
+
+    [db]
+    );
+
+console.log(posts);
+
   return (
     <>
-    <div>
+      <div>
         {posts.map((post) => (
-            <Post key={post.id}
-            id={post.id}
-            username={post.username}
-            userImg={post.userImg}
-            img={post.img}
-            description={post.description}
-
-            />
-
+          <Post
+            key={post.data().id}
+            id={post.data().id}
+            username={post.data().username}
+            userImg={post.data().profilImg}
+            img={post.data().image}
+            description={post.data().caption}
+          />
         ))}
-    </div>
-   
+      </div>
     </>
-  )
-}
+  );
+};
 
-export default Posts
+export default Posts;

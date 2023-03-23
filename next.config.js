@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['www.meilleure-innovation.com', 'webdrop.fr', 'cloudflare-ipfs.com', 'lh3.googleusercontent.com'],
+    domains: ['www.meilleure-innovation.com', 'webdrop.fr', 'cloudflare-ipfs.com', 'lh3.googleusercontent.com', 'firebasestorage.googleapis.com'],
   },
 }
 
