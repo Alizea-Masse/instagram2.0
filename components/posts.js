@@ -19,21 +19,22 @@ const Posts = () => {
     [db]
     );
 
-console.log(posts);
+
+
 
   return (
     <>
       <div>
         {posts.map((post) => (
           <Post
-            key={post.data().id}
-            id={post.data().id}
+            key={post._key.path.segments[6]} 
+            id={post._key.path.segments[6]}
             username={post.data().username}
-            userImg={post.data().profilImg}
+            userImg={post.data().profileImg}
             img={post.data().image}
             description={post.data().caption}
           />
-        ))}
+          ))}
       </div>
     </>
   );
