@@ -86,7 +86,7 @@ const Post = ({ id, key, username, userImg, img, description }) => {
   };
 
   return (
-    <div className="bg-white border rounded-sm my-5">
+    <div className="bg-white border rounded-sm my-5 w-2/3 mx-auto ">
       {/* header */}
       <div className="flex items-center p-5">
         <Image
@@ -106,12 +106,12 @@ const Post = ({ id, key, username, userImg, img, description }) => {
         height="400"
         src={img}
         alt=""
-        className="object-cover w-full rounded-md"
+        className="object-cover w-full rounded-md "
       />
       {/* buttons */}
       {data && (
         <div className="flex justify-between align-middle px-4 ">
-          <div className="flex space-x-4 justify-center">
+          <div className="flex space-x-4 justify-center pt-4">
             {hasLikes ? (<AiFillHeart onClick={likePost} className="navBtn text-red-700 " />) : (<AiOutlineHeart onClick={likePost} className="navBtn" />)}
             
             <FaRegCommentDots className="navBtn" />
